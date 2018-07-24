@@ -3,6 +3,7 @@
     $.fn.annotate = function() {
     // create a parent svg tag
     //Initialize variables
+    var parentDiv = $('<div contenteditable=true/>')
     var svgTag=$('<svg width="500" height="400" class="svgContainer"/>');
     var svgns = "http://www.w3.org/2000/svg";
     var currentElement = {};
@@ -10,7 +11,7 @@
     var tool=4,clientX1=0,clientX2=0,clientY1=0,clientY2=0,
     isDragging=false,elementIsActive=false,annotations=[],
     stroke="#000000",strokeWidth="2px",fill="transparent",strPath = '',
-    elements=[],
+    elements=[],val = 'Write your text here'
     dragX1=0,dragX2=0,dragY1=0,dragY2=0;
     svgTag.attr({
                   height:this.height(),
@@ -64,7 +65,8 @@
 
 
 
-    this.append(svgTag)
+    parentDiv.append(svgTag)
+    this.append(parentDiv)
     var cont=svgTag[0]
     
     this.on('mousedown',function(event){
@@ -78,7 +80,9 @@
 
     })
     this.on('mousemove',function(event){
-      
+      if(tool==6){
+        console.log("abcd")
+      }
       if(isDragging && !elementIsActive){
         shapeIsDrawn=true
         editShape(event.offsetX,event.offsetY)
@@ -114,7 +118,7 @@
     })
     this.on('mouseup',function(event){
       elementIsActive = false
-        if(!shapeIsDrawn )
+        if(!shapeIsDrawn && (tool != 5 && tool!= 6))
         {
           elementIsActive = false;
           $(currentElement).off('mouseup').off('mousedown').off('mousemove').remove
@@ -190,18 +194,15 @@
       strPath += " L" + clientX2 + " " + clientY2
       currentElement.setAttributeNS(null, 'd', strPath)
     }
+    else if(tool == 5){
+      currentElement.setAttributeNS(null, 'x', clientX2);
+      currentElement.setAttributeNS(null, 'y', clientY2);
+    }
+    else if(tool == 6){
+      currentElement.setAttributeNS(null, 'x', clientX2);
+      currentElement.setAttributeNS(null, 'y', clientY2);
+    }
    }; 
-   var addAnnotation = function(){
-     annotations.push({
-                      clientX1:clientX1,
-                      clientY1:clientY1,
-                      clientX2:clientX2,
-                      clientY2:clientY2,
-                      shape:1,
-                      strokeWidth:strokeWidth,
-                      fill:fill
-                    })
-   };
    var draw = function(){
       if( tool === 0 ){
         return
@@ -225,6 +226,10 @@
       else if( tool === 5 ){
         //tool is circle
         drawShape.emoji(clientX1, clientY1)
+      }
+      else if( tool === 6 ){
+        //tool is circle
+        drawShape.text(clientX1, clientY1, val)
       }
    } ;
    
@@ -282,16 +287,29 @@
                         },
                         emoji: function(x, y){
                         	var id = "image" + Math.floor((Math.random() * 1000) + 1)
-                        	var image = document.createElementNS(svgns, 'image')
+                        	var image = currentElement  = document.createElementNS(svgns, 'image')
                         	image.setAttributeNS(null, 'height', '50px')
                         	image.setAttributeNS(null, 'width', '50px')
                         	image.setAttributeNS('http://www.w3.org/1999/xlink','href', 'https://image.flaticon.com/icons/svg/60/60536.svg');
                         	image.setAttributeNS(null,'x',x);
-							image.setAttributeNS(null,'y',y);
-							image.setAttributeNS(null, 'id', id)
-							image.setAttributeNS(null, 'visibility', 'visible')
-							cont.appendChild(image)
-							elements.push(id)
+            							image.setAttributeNS(null,'y',y);
+            							image.setAttributeNS(null, 'id', id)
+            							image.setAttributeNS(null, 'visibility', 'visible')
+            							cont.appendChild(image)
+            							elements.push(id)
+                        },
+                        text: function(x, y, val){
+                          var id = "text" + Math.floor((Math.random() * 1000) + 1)
+                          var text = currentElement  = document.createElementNS(svgns, 'text')
+                          var textNode = document.createTextNode(val)
+                          text.appendChild(textNode)
+                          text.setAttributeNS(null, 'id', id)
+                          text.setAttributeNS(null, "x", x)
+                          text.setAttributeNS(null, "y", y)
+                          text.setAttributeNS(null, "font-size", "30px")
+                          text.setAttributeNS(null, 'style', 'outline:dotted;outline-width:2px;')
+                          cont.appendChild(text)
+                          elements.push(id)
                         }
 
    							}

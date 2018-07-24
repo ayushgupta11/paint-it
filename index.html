@@ -10,7 +10,9 @@
         .annotationIsSelected{
         	fill:red !important;
           fill-opacity:0.5;
-
+          outline-style: dotted;
+          outline-width: 2px;
+          outline-color: #494848;
         }
         #example_id{
         	width: 20%;
@@ -22,7 +24,6 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.skinFlat.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     </head>
     <body>
     	<div>
@@ -34,11 +35,12 @@
        	<button value="3" onclick="changeTool(3,this)">Circle</button>
        	<button value="4" onclick="changeTool(4,this)" class="active">Freehand</button>
        	<button value="4" onclick="changeTool(5,this)">Emoji</button>
+        <button value="4" onclick="changeTool(6,this)">Text</button>
        	<button onclick="undo()">Undo</button>
        	<input type="text" id="example_id" name="example_name" value="2"/>
        	<button onclick="deleteItem()">Delete</button>
        	<button onclick="deleteAll()">Delete All</button>
-       	<input class="jscolor" value="#000000">
+       	<input class="jscolor" value="#000000" />
        </div>
    </div>
     </body>
@@ -52,8 +54,8 @@
     var myChart = Highcharts.chart('container', {
         chart: {
             type: 'bar',
-            width: $(document).width() - 30,
-            height: $(document).height() - 50
+            width: $(document).width() - 100,
+            height: $(document).height() - 150
         },
         title: {
             text: 'Fruit Consumption'
@@ -98,11 +100,9 @@ function deleteAll(){
 </script>
 <script>
 $(".jscolor").on('change', function(){
-	console.log(this.value)
 	$("#container").find('svg').trigger('changeColor', "#" + this.value)
 })
 $("#example_id").on('change', function(){
-	console.log(this.value)
 	$("#container").find('svg').trigger('changeWidth',this.value + "px")
 })
 
@@ -110,7 +110,7 @@ $(document).ready(function(){
 $("#example_id").ionRangeSlider({
 	min: 1,
 	max: 10
-});
+})
 })
     
 </script>
