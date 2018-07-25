@@ -1,8 +1,8 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <META http-equiv="X-UA-Compatible" content="IE=9" />
         <title>Annotation 1.0</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,23 +24,27 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.2.0/css/ion.rangeSlider.skinFlat.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     </head>
     <body>
     	<div>
        <div id="container" style="display: flex;justify-content: center;align-items: center;">
        </div>
        <div class="button-container">
-       	<button value="1" onclick="changeTool(1,this)">Line</button>
-       	<button value="2" onclick="changeTool(2,this)">Rectangle</button>
-       	<button value="3" onclick="changeTool(3,this)">Circle</button>
-       	<button value="4" onclick="changeTool(4,this)" class="active">Freehand</button>
-       	<button value="4" onclick="changeTool(5,this)">Emoji</button>
-        <button value="4" onclick="changeTool(6,this)">Text</button>
-       	<button onclick="undo()">Undo</button>
-       	<input type="text" id="example_id" name="example_name" value="2"/>
-       	<button onclick="deleteItem()">Delete</button>
-       	<button onclick="deleteAll()">Delete All</button>
-       	<input class="jscolor" value="#000000" />
+       	<button value="1" onclick="changeTool(1,this)"><i class="material-icons">trending_up</i></button>
+       	<button value="2" onclick="changeTool(2,this)"><i class="material-icons">crop_landscape</i></button>
+       	<button value="3" onclick="changeTool(3,this)"><i class="material-icons">radio_button_unchecked</i></button>
+       	<button value="4" onclick="changeTool(4,this)" class="active"><i class="material-icons">edit</i></button>
+       	<button value="4" onclick="changeTool(5,this)"><i class="material-icons">mood</i></button>
+        <button value="4" onclick="changeTool(6,this)"><i class="material-icons">text_format</i></button>
+        <button onclick="deleteItem()"><i class="material-icons">delete</i></button>
+        <button onclick="deleteAll()"><i class="material-icons">delete_sweep</i></button>
+       	<button onclick="undo()"><i class="material-icons">undo</i></button>
+        <input class="jscolor" value="#000000" style="padding: 11px 20px;width:2.3%;"/>
+        <div width="20%">
+       	<input type="text" id="example_id" name="example_name" value="2" />
+       </div>
        </div>
    </div>
     </body>

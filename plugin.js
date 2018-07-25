@@ -67,6 +67,7 @@
 
     parentDiv.append(svgTag)
     this.append(parentDiv)
+    $(this).attr('style','cursor:crosshair;')
     var cont=svgTag[0]
     
     this.on('mousedown',function(event){
@@ -80,9 +81,6 @@
 
     })
     this.on('mousemove',function(event){
-      if(tool==6){
-        console.log("abcd")
-      }
       if(isDragging && !elementIsActive){
         shapeIsDrawn=true
         editShape(event.offsetX,event.offsetY)
@@ -105,10 +103,12 @@
           element.removeClass('annotationIsSelected')
         }
         else if(element.tagName === "image"){
+          //debugger;
         element.setAttributeNS(null, 'x', Number(element.getAttribute('x'))+(event.offsetX - dragX1));
         element.setAttributeNS(null, 'y', Number(element.getAttribute('y'))+(event.offsetY - dragY1))	
         }
         else{
+          //debugger;
         element.setAttributeNS(null, 'x', Number(element.getAttribute('x'))+(event.offsetX - dragX1));
         element.setAttributeNS(null, 'y', Number(element.getAttribute('y'))+(event.offsetY - dragY1));
         }
@@ -118,7 +118,7 @@
     })
     this.on('mouseup',function(event){
       elementIsActive = false
-        if(!shapeIsDrawn && (tool != 5 && tool!= 6))
+        if(!shapeIsDrawn)
         {
           elementIsActive = false;
           $(currentElement).off('mouseup').off('mousedown').off('mousemove').remove
