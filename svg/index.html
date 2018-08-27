@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>SVG.JS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+       <div id="container" style="display: flex;justify-content: center;align-items: center;">
+       </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="painterro-0.2.65.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript">
+    $(function () { 
+    var p = Painterro({
+        colorScheme: {
+            main: '#fdf6b8', // make panels light-yellow
+            control: '#FECF67' // change controls color
+          },
+          toolbarPosition: 'right',
+        initTextColor: 'black',
+        initTextStyle:'16px "Open Sans", sans-serif"',
+        defaultTool: 'brush',
+        hiddenTools: ['save','open','close','settings','crop','rotate','pixelize','select','color'],
+    })
+    $(document).ready(function(){
+        $(".ptro-bar").width(500)
+        $(".ptro-wrapper").width(500)
+        $(".ptro-holder").width(500)
+        $(".ptro-holder-wrapper").width(500)
+        $(".ptro-holder-wrapper").attr('style','background:none;')
+    })
+    var openImage = 'https://assets.highcharts.com/images/demo-thumbnails/highcharts/chart-update-default.png'
+    p.show('http://pandas-xlsxwriter-charts.readthedocs.io/_images/chart_grouped_column_farms.png')
+});
+  </script>
+</html>

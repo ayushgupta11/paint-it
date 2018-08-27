@@ -80,7 +80,16 @@
             data: [5, 7, 3]
         }]
     })
-    $('#container').annotate()
+        function onCreateElementNsReady(func) {
+            if (document.createElementNS != undefined) {
+                func();
+            } else {
+                setTimeout(function() { onCreateElementNsReady(func); }, 100);
+            }
+        }
+        onCreateElementNsReady(function() {
+            $("#container").annotate()
+        })
 });
   </script>
   <script>
