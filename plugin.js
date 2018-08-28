@@ -13,6 +13,7 @@
     stroke="#000000",strokeWidth="2px",fill="transparent",strPath = '',
     elements=[],val = 'Write your text here'
     dragX1=0,dragX2=0,dragY1=0,dragY2=0;
+    var redoArr = []
     svgTag.attr({
                   height:this.height(),
                   width:this.width(),
@@ -23,15 +24,20 @@
                 left:0,
                 'z-index':0
            			})
-
-
-
            //Emitted events
            svgTag.on('undo', function(){
            	if(elements.length){
-           	$("#" + elements[elements.length - 1]).remove()
-           	elements.splice(-1, 1)
+             $("#" + elements[elements.length - 1]).css("visibility", "hidden")
+             redoArr.push(elements[elements.length - 1])
+             elements.splice(-1, 1)
            }
+           })
+           svgTag.on('redo', function(){
+             if(redoArr.length){
+               $("#" + redoArr[redoArr.length -1]).css("visibility", "visible")
+               elements.push(redoArr[redoArr.length -1])
+               redoArr.splice(-1, 1)
+             }
            })
            svgTag.on('deleteAll', function(){
            	$.each(elements, function(key, value){

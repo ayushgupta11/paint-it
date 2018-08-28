@@ -40,7 +40,8 @@
         <button value="4" onclick="changeTool(6,this)"><i class="material-icons">text_format</i></button>
         <button onclick="deleteItem()"><i class="material-icons">delete</i></button>
         <button onclick="deleteAll()"><i class="material-icons">delete_sweep</i></button>
-       	<button onclick="undo()"><i class="material-icons">undo</i></button>
+           <button onclick="undo()"><i class="material-icons">undo</i></button>
+           <button onclick="redo()"><i class="material-icons">redo</i></button>
         <input class="jscolor" value="#000000" style="padding: 11px 20px;width:2.3%;"/>
         <div width="20%">
        	<input type="text" id="example_id" name="example_name" value="2" />
@@ -101,6 +102,9 @@
 }
 function undo(){
 	$("#container").find('svg').trigger('undo')
+}
+function redo(){
+	$("#container").find('svg').trigger('redo')
 }
 function deleteItem(){
 	var id = $(".annotationIsSelected").attr("id")
