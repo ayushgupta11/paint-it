@@ -4,7 +4,7 @@
     // create a parent svg tag
     //Initialize variables
     var parentDiv = $('<div contenteditable=true/>')
-    var svgTag=$('<svg width="500" height="400" class="svgContainer"/>');
+    var svgTag=$('svg');
     var svgns = "http://www.w3.org/2000/svg";
     var currentElement = {};
     // toolId are 0 for none , 1 for line , 2 for rectangle , 3 for circle
@@ -14,16 +14,21 @@
     elements=[],val = 'Write your text here'
     dragX1=0,dragX2=0,dragY1=0,dragY2=0;
     var redoArr = []
-    svgTag.attr({
-                  height:this.height(),
-                  width:this.width(),
-                })
-           .css({
-           			position:"absolute",
-           			top:0,
-                left:0,
-                'z-index':0
-           			})
+    // svgTag.attr({
+    //               height:this.height(),
+    //               width:this.width(),
+    //             })
+    //        .css({
+    //        			position:"absolute",
+    //        			top:0,
+    //             left:0,
+    //             'z-index':0
+    //        			})
+    parentDiv.css({
+      position: 'absolute',
+      top:0,
+      left:0
+    })
            //Emitted events
            svgTag.on('undo', function(){
            	if(elements.length){

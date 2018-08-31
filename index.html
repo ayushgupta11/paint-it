@@ -42,11 +42,13 @@
         <button onclick="deleteAll()"><i class="material-icons">delete_sweep</i></button>
            <button onclick="undo()"><i class="material-icons">undo</i></button>
            <button onclick="redo()"><i class="material-icons">redo</i></button>
+           <button onclick="save()"><i class="material-icons">save</i></button>
         <input class="jscolor" value="#000000" style="padding: 11px 20px;width:2.3%;"/>
         <div width="20%">
        	<input type="text" id="example_id" name="example_name" value="2" />
        </div>
        </div>
+       <div class="copyDiv"></div>
    </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -56,31 +58,68 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
   <script type="text/javascript">
   	$(function () { 
-    var myChart = Highcharts.chart('container', {
-        chart: {
-            type: 'bar',
-            width: $(document).width() - 100,
-            height: $(document).height() - 150
-        },
-        title: {
-            text: 'Fruit Consumption'
-        },
-        xAxis: {
-            categories: ['Apples', 'Bananas', 'Oranges']
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
+    
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Browser market shares in January, 2018'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
             }
-        },
-        series: [{
-            name: 'Jane',
-            data: [1, 0, 4]
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Chrome',
+            y: 61.41,
+            sliced: true,
+            selected: true
         }, {
-            name: 'John',
-            data: [5, 7, 3]
+            name: 'Internet Explorer',
+            y: 11.84
+        }, {
+            name: 'Firefox',
+            y: 10.85
+        }, {
+            name: 'Edge',
+            y: 4.67
+        }, {
+            name: 'Safari',
+            y: 4.18
+        }, {
+            name: 'Sogou Explorer',
+            y: 1.64
+        }, {
+            name: 'Opera',
+            y: 1.6
+        }, {
+            name: 'QQ',
+            y: 1.2
+        }, {
+            name: 'Other',
+            y: 2.61
         }]
-    })
+    }]
+});
         function onCreateElementNsReady(func) {
             if (document.createElementNS != undefined) {
                 func();
@@ -112,6 +151,9 @@ function deleteItem(){
 }
 function deleteAll(){
 	$("#container").find('svg').trigger('deleteAll')
+}
+function save(){
+	$(".svgContainer").clone().appendTo(".copyDiv")
 }
 //ends
 </script>
